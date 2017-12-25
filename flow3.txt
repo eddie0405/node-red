@@ -1,0 +1,118 @@
+[
+    {
+        "id": "b37de068.e4178",
+        "type": "tab",
+        "label": "Flow 3"
+    },
+    {
+        "id": "da78b196.83b3c",
+        "type": "inject",
+        "z": "b37de068.e4178",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "x": 170,
+        "y": 140,
+        "wires": [
+            [
+                "85678a9d.fe0128",
+                "5eb32a21.7988f4"
+            ]
+        ]
+    },
+    {
+        "id": "85678a9d.fe0128",
+        "type": "function",
+        "z": "b37de068.e4178",
+        "name": "payload",
+        "func": "msg.headers={\n    deviceKey: \"r30s2nKGqvMc26ni\"\n};\nmsg.payload=\"Temperature,,300\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 349,
+        "y": 144,
+        "wires": [
+            [
+                "3a5ae6e7.b4f9ea"
+            ]
+        ]
+    },
+    {
+        "id": "3a5ae6e7.b4f9ea",
+        "type": "http request",
+        "z": "b37de068.e4178",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://api.mediatek.com/mcs/v2/devices/DizT5fTF/datapoints.csv",
+        "tls": "",
+        "x": 454,
+        "y": 220,
+        "wires": [
+            [
+                "b77091f9.84d42",
+                "93d539a9.731f18"
+            ]
+        ]
+    },
+    {
+        "id": "b77091f9.84d42",
+        "type": "http response",
+        "z": "b37de068.e4178",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 647,
+        "y": 204,
+        "wires": []
+    },
+    {
+        "id": "93d539a9.731f18",
+        "type": "debug",
+        "z": "b37de068.e4178",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 707,
+        "y": 273,
+        "wires": []
+    },
+    {
+        "id": "f9bf313b.4e9ed",
+        "type": "http request",
+        "z": "b37de068.e4178",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://api.mediatek.com/mcs/v2/devices/DizT5fTF/datapoints.csv",
+        "tls": "",
+        "x": 459,
+        "y": 284,
+        "wires": [
+            [
+                "93d539a9.731f18",
+                "b77091f9.84d42"
+            ]
+        ]
+    },
+    {
+        "id": "5eb32a21.7988f4",
+        "type": "function",
+        "z": "b37de068.e4178",
+        "name": "payload1",
+        "func": "msg.headers={\n    deviceKey: \"r30s2nKGqvMc26ni\"\n};\nmsg.payload=\"Humidity,,33\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 267,
+        "y": 273,
+        "wires": [
+            [
+                "f9bf313b.4e9ed"
+            ]
+        ]
+    }
+]
